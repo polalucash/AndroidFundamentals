@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:orientation="vertical"
+	tools:context=".MainActivity">
+    
+    <Button
+        android:id="@+id/avengers_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/avengers_movie"
+        android:textAlignment="textStart" />
+    
+    <Button
+        android:id="@+id/movie_list_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/movie_list"
+        android:textAlignment="textStart" />
+	
+	<Button
+		android:id="@+id/fragment_holder_btn"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/fragment_holder"
+		android:textAlignment="viewStart" />
+	<Button
+		android:id="@+id/fragment_hw_view_page_btn"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="HW_view_page"
+		android:textAlignment="viewStart" />
+	
+</LinearLayout>

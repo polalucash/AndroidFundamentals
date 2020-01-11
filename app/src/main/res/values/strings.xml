@@ -1,0 +1,35 @@
+<resources>
+	<string name="app_name">MyMoviesApp</string>
+	<string name="main_picture">Main Picture</string>
+	<string name="secondary_picture">Secondary Picture</string>
+	<string name="movie_trailer">Movie Trailer</string>
+	<string name="released">Released:</string>
+	<string name="movie_item_picture">Movie item picture</string>
+	<string name="avengers_title">Avengers: Infinity War</string>
+	<string name="date">2018-04-27</string>
+	<string name="overview">Overview:</string>
+	<string name="avengers_movie_description">As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos. A despot of intergalactic infamy, his goal is to collect all six Infinity Stones, artifacts of unimaginable power, and use them to inflict his twisted will on all of reality. Everything the Avengers have fought for has led up to this moment, the fate of Earth and existence has never been more uncertain.</string>
+	<string name="avengers_movie">Avengers Movie</string>
+	<string name="movie_list">Movie List</string>
+	<string name="fragment_holder">Fragment Holder</string>
+	<string name="fragment_cover">fragment cover</string>
+	<string name="details_fragment_poster">details fragment poster</string>
+	<string name="jurassic_world_title">Jurassic World - Fallen Kingdom</string>
+	<string name="jurassic_world_overview">Three years after the demise of Jurassic World, a volcanic eruption threatens the remaining dinosaurs on the isla Nublar, so Claire Dearing, the former park manager, recruits Owen Grady to help prevent the extinction of the dinosaurs once again</string>
+	<string name="the_meg_title">The Meg</string>
+	<string name="the_meg_overview">A deep sea submersible pilot revisits his past fears in the Mariana Trench, and accidentally unleashes the seventy foot ancestor of the Great White Shark believed to be extinct</string>
+	<string name="the_first_purge_title">The First Purge</string>
+	<string name="the_first_purge_overview">To push the crime rate below one percent for the rest of the year, the New Founding Fathers of America test a sociological theory that vents aggression for one night in one isolated community. But when the violence of oppressors meets the rage of the others, the contagion will explode from the trial-city borders and spread across the nation</string>
+	<string name="deadpool2_titile">Deadpool 2</string>
+	<string name="deadpool2_overview">Wisecracking mercenary Deadpool battles the evil and powerful Cable and other bad guys to save a boy\'s life</string>
+	<string name="black_panther_title">Black Panther</string>
+	<string name="black_panther_overview">King T\'Challa returns home from America to the reclusive, technologically advanced African nation of Wakanda to serve as his country\'s new leader. However, T\'Challa soon finds that he is challenged for the throne by factions within his own country as well as without. Using powers reserved to Wakandan kings, T\'Challa assumes the Black Panther mantel to join with girlfriend Nakia, the queen-mother, his princess-kid sister, members of the Dora Milaje (the Wakandan \'special forces\') and an American secret agent, to prevent Wakanda from being dragged into a world war</string>
+	<string name="ocean_eight_title">Ocean\'s Eight</string>
+	<string name="ocean_eight_overview">Debbie Ocean, a criminal mastermind, gathers a crew of female thieves to pull off the heist of the century at New York\'s annual Met Gala</string>
+	<string name="interstellar_title">Interstellar</string>
+	<string name="interstellar_overview">Interstellar chronicles the adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage</string>
+	<string name="thor_ragnarok_title">Thor - Ragnarok</string>
+	<string name="thor_ragnarok_overview">Thor is on the other side of the universe and finds himself in a race against time to get back to Asgard to stop Ragnarok, the prophecy of destruction to his homeworld and the end of Asgardian civilization, at the hands of an all-powerful new threat, the ruthless Hela</string>
+	<string name="guardians_of_the_galaxy_title">Guardians of the Galaxy</string>
+	<string name="guardians_of_the_galaxy_overview">Light years from Earth, 26 years after being abducted, Peter Quill finds himself the prime target of a manhunt after discovering an orb wanted by Ronan the Accuser</string>
+</resources>
