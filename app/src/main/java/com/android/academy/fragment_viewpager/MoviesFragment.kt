@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.academy.recycleview_adapters.MoviesViewAdapter
 import com.android.academy.OnMovieClickListener
 import com.android.academy.R
 import com.android.academy.models.MovieModel
+import com.android.academy.recycleview_adapters.MoviesViewAdapter
 
 class MoviesFragment : Fragment(), OnMovieClickListener {
 	

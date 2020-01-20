@@ -9,10 +9,27 @@
 		android:roundIcon="@mipmap/ic_launcher_round"
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme">
+		<activity android:name=".h_w_threads_menu_options.ThreadHandlerActivity"/>
+		<activity android:name=".h_w_threads_menu_options.AsyncTaskActivity"
+			android:label="AsyncTaskActivity"
+			android:theme="@style/FullscreenTheme"
+			/>
+		<activity android:name=".h_w_threads_menu_options.MainMenuActivity">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				
+				<category android:name="android.intent.category.LAUNCHER" />
+				
+				<action android:name="android.intent.action.VIEW" />
+			</intent-filter>
+		</activity>
 		<activity android:name=".h_w_viewpager.ScreenSlidePagerActivity">
 			<intent-filter>
-				<!-- Include the host attribute if you want your app to respond
-					 only to URLs with your app's domain. -->
+				
+				<!--
+                     Include the host attribute if you want your app to respond
+					 only to URLs with your app's domain.
+                -->
 				<data android:scheme="https" />
 				<!-- The BROWSABLE category is required to get links from web pages. -->
 				<category android:name="android.intent.category.BROWSABLE" />
@@ -21,6 +38,7 @@
 		<activity android:name=".recycleview_adapters.MovieListActivity" />
 		<activity android:name=".avengers_movie.MovieActivity">
 			<intent-filter>
+				
 				<!--
 					 Include the host attribute if you want your app to respond
 					 only to URLs with your app's domain.
@@ -30,19 +48,9 @@
 				<category android:name="android.intent.category.BROWSABLE" />
 			</intent-filter>
 		</activity>
-		<activity android:name=".MainActivity">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-				
-				<category android:name="android.intent.category.LAUNCHER" />
-				
-				<action android:name="android.intent.action.VIEW" />
-			</intent-filter>
-		</activity>
-		<activity android:name=".fragment_viewpager.MainFragmentsActivity" >
-		</activity>
-		<activity android:name=".h_w_viewpager.MainHWViewPageActivity" >
-		</activity>
+		<activity android:name=".MainActivity" />
+		<activity android:name=".fragment_viewpager.MainFragmentsActivity" />
+		<activity android:name=".h_w_viewpager.MainHWViewPageActivity" />
 	</application>
 
 </manifest>

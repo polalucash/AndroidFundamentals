@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.android.academy.avengers_movie.MovieActivity
 import com.android.academy.fragment_viewpager.MainFragmentsActivity
 import com.android.academy.h_w_viewpager.MainHWViewPageActivity
-import com.android.academy.h_w_viewpager.ScreenSlidePagerActivity
-import com.android.academy.models.MovieModel
 import com.android.academy.recycleview_adapters.MovieListActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
