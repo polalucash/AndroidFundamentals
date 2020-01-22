@@ -43,4 +43,5 @@
 	<string name="msg_cancelled_task">Cancelled Task</string>
 	<string name="msg_preexecute">Pre execute run</string>
 	<string name="msg_postexecute">Post execute run</string>
+	<string name="done">Done!</string>
 </resources>

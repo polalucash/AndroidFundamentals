@@ -1,38 +1,40 @@
 package com.android.academy.h_w_threads_menu_options
 
-import android.content.Context
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.android.academy.R
 import kotlinx.android.synthetic.main.fragment_counter.*
 
 class AsyncTaskActivity : AppCompatActivity(), IAsyncTaskEvents  {
-	private lateinit var counterFragment: CounterFragment
 	private var asyncTask: CounterAsyncTask? = null
-	
-	companion object{
-		const val FRAGMENT_TAG = "fragment_tag"
+	companion object {
+		const val Status: String = "STATUS"
 	}
 	
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		setContentView(R.layout.activity_async_task)
+		setContentView(R.layout.fragment_counter)
 		
-		savedInstanceState?.let {
-			counterFragment = supportFragmentManager.findFragmentByTag(FRAGMENT_TAG) as CounterFragment
-		} ?: run {
-			counterFragment = CounterFragment()//Get Fragment Instance
-			val data = Bundle()//Use bundle to pass data
-			data.putString(	CounterFragment.FRAGMENT_TYPE, 	getString(R.string.async_task_activity))//put string, int, etc in bundle with a key value
-			counterFragment.arguments = data//Finally set argument bundle to fragment
-			supportFragmentManager
-				.beginTransaction()
-				.replace(R.id.fragment, counterFragment, FRAGMENT_TAG)
-				.commit()//now replace the argument fragment
-		}
+		cancel_btn.setOnClickListener { cancelAsyncTask() }
+		start_btn.setOnClickListener { startAsyncTask() }
+		create_btn.setOnClickListener { createAsyncTask() }
+		
+		counter_status_text.text =
+			if (savedInstanceState != null && savedInstanceState.containsKey(Status)) {
+				 val counter = savedInstanceState.getInt(Status)
+				createAsyncTask()
+				startAsyncTask(counter)
+				counter.toString()
+			} else {
+				getString(R.string.async_task_activity)
+			}
+		
+	}
+	
+	override fun onSaveInstanceState(outState: Bundle) {
+		counter_status_text.text.toString().toIntOrNull()?.let{	outState.putInt(Status ,it)}
+		super.onSaveInstanceState(outState)
 	}
 	
 	/***
@@ -43,12 +45,12 @@ class AsyncTaskActivity : AppCompatActivity(), IAsyncTaskEvents  {
 		asyncTask = CounterAsyncTask(this)
 	}
 	
-	override fun startAsyncTask() {
+	override fun startAsyncTask(counterStart:Int) {
 		if (asyncTask == null || asyncTask !!.isCancelled) {
 			Toast.makeText(this, R.string.msg_should_create_task, Toast.LENGTH_SHORT).show()
 		} else {
 			Toast.makeText(this, getString(R.string.msg_started_task), Toast.LENGTH_SHORT).show()
-			asyncTask!!.execute(10)
+			asyncTask!!.execute(counterStart)
 		}
 	}
 	
@@ -64,14 +66,13 @@ class AsyncTaskActivity : AppCompatActivity(), IAsyncTaskEvents  {
 	
 	override fun onPostExecute() {
 		Toast.makeText(this, getString(R.string.msg_postexecute), Toast.LENGTH_SHORT).show()
-		counterFragment.updateFragmentText("Done!")
+		counter_status_text.text =getString(R.string.done)
 		asyncTask = null
 	}
 	
 	override fun onProgressUpdate(value: String) {
-		counterFragment.updateFragmentText(value)
+		counter_status_text.text = value
 	}
-	
 	
 	/***
 	 * //  IAsyncTaskEvent's methods - end

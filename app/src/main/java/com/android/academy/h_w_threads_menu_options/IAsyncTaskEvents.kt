@@ -6,6 +6,6 @@ interface IAsyncTaskEvents {
 	fun onProgressUpdate( value: String)
 	
 	fun createAsyncTask()
-	fun startAsyncTask()
+	fun startAsyncTask(counterStart:Int=0)
 	fun cancelAsyncTask()
 }

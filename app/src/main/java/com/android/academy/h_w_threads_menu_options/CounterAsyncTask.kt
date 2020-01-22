@@ -5,16 +5,16 @@ import android.os.SystemClock
 import android.widget.TextView
 import java.lang.ref.WeakReference
 
-class CounterAsyncTask(private val iAsyncTaskEvents: IAsyncTaskEvents):
+class CounterAsyncTask(private val iAsyncTaskEvents:IAsyncTaskEvents):
 	AsyncTask<Int, String, Unit>() {
 	
 	override fun doInBackground(vararg params: Int?) {
-		val length = when (params.size) {
+		val start = when (params.size) {
 			1 -> params[0]!!
-			else -> 10
+			else -> 0
 		}
 		
-		for (i in 0..length) {
+		for (i in start..10) {
 			SystemClock.sleep(500)
 			if (isCancelled){
 				return
