@@ -6,7 +6,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="#009CCA"
-	tools:context=".h_w_threads_menu_options.AsyncTaskActivity">
+	>
 	<Button
 		android:id="@+id/start_btn"
 		android:layout_width="0dp"

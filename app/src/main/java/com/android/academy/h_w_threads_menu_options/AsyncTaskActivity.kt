@@ -29,7 +29,6 @@ class AsyncTaskActivity : AppCompatActivity(), IAsyncTaskEvents  {
 			} else {
 				getString(R.string.async_task_activity)
 			}
-		
 	}
 	
 	override fun onSaveInstanceState(outState: Bundle) {
@@ -79,7 +78,7 @@ class AsyncTaskActivity : AppCompatActivity(), IAsyncTaskEvents  {
 	 */
 	override fun onDestroy() {
 		asyncTask?.let {
-			it.cancel(false)
+			it.cancel(true)
 			asyncTask = null
 		}
 		super.onDestroy()
