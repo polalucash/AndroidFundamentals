@@ -7,19 +7,11 @@
 	tools:context=".MainActivity">
     
     <Button
-        android:id="@+id/avengers_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/avengers_movie"
-        android:textAlignment="textStart" />
-    
-    <Button
         android:id="@+id/movie_list_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/movie_list"
         android:textAlignment="textStart" />
-	
 	<Button
 		android:id="@+id/fragment_holder_btn"
 		android:layout_width="match_parent"
@@ -30,7 +22,7 @@
 		android:id="@+id/fragment_hw_view_page_btn"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:text="HW_view_page"
+		android:text="@string/my_viewpager"
 		android:textAlignment="viewStart" />
 	
 </LinearLayout>

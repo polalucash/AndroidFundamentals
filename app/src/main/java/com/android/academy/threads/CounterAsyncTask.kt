@@ -1,9 +1,7 @@
-package com.android.academy.h_w_threads_menu_options
+package com.android.academy.threads
 
 import android.os.AsyncTask
 import android.os.SystemClock
-import android.widget.TextView
-import java.lang.ref.WeakReference
 
 class CounterAsyncTask(private val iAsyncTaskEvents:IAsyncTaskEvents):
 	AsyncTask<Int, String, Unit>() {

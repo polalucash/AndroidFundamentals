@@ -45,4 +45,6 @@
 	<string name="msg_preexecute">Pre execute run</string>
 	<string name="msg_postexecute">Post execute run</string>
 	<string name="done">Done!</string>
+	<string name="my_viewpager">My Viewpager</string>
+	<string name="open_background_service_activity">Open Background Service Activity</string>
 </resources>

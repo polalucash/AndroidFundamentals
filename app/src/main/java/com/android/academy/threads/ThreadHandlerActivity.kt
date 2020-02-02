@@ -1,4 +1,4 @@
-package com.android.academy.h_w_threads_menu_options
+package com.android.academy.threads
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

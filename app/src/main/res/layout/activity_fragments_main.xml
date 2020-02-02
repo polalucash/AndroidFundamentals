@@ -4,7 +4,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context=".fragment_viewpager.MainFragmentsActivity"
+	tools:context=".fragment_viewpager_by_lec.MainFragmentsActivity"
 	android:orientation="horizontal">
 	<FrameLayout
 		android:id="@+id/fragment_frame"

@@ -1,4 +1,4 @@
-package com.android.academy.fragment_viewpager
+package com.android.academy.fragment_viewpager_by_lec
 
 import android.os.Bundle
 import android.view.LayoutInflater

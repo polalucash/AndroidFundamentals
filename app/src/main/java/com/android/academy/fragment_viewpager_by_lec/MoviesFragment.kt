@@ -1,4 +1,4 @@
-package com.android.academy.fragment_viewpager
+package com.android.academy.fragment_viewpager_by_lec
 
 import android.content.Context
 import android.os.Bundle
@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.academy.OnMovieClickListener
 import com.android.academy.R
 import com.android.academy.models.MovieModel
-import com.android.academy.recycleview_adapters.MoviesViewAdapter
+import com.android.academy.recyclerview_adapters_by_lec.MoviesViewAdapter
 
 class MoviesFragment : Fragment(), OnMovieClickListener {
 	

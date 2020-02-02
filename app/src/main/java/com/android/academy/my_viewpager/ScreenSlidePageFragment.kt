@@ -1,4 +1,4 @@
-package com.android.academy.h_w_viewpager
+package com.android.academy.my_viewpager
 
 import android.content.Context
 import android.content.Intent

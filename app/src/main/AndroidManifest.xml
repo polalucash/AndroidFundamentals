@@ -9,21 +9,14 @@
 		android:roundIcon="@mipmap/ic_launcher_round"
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme">
-		<activity android:name=".h_w_threads_menu_options.ThreadHandlerActivity"/>
-		<activity android:name=".h_w_threads_menu_options.AsyncTaskActivity"
+		<activity android:name=".background_services.BGServiceActivity"></activity>
+		<activity android:name=".threads.ThreadHandlerActivity" />
+		<activity
+			android:name=".threads.AsyncTaskActivity"
 			android:label="AsyncTaskActivity"
-			android:theme="@style/FullscreenTheme"
-			/>
-		<activity android:name=".h_w_threads_menu_options.MainMenuActivity">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-				
-				<category android:name="android.intent.category.LAUNCHER" />
-				
-				<action android:name="android.intent.action.VIEW" />
-			</intent-filter>
-		</activity>
-		<activity android:name=".h_w_viewpager.ScreenSlidePagerActivity">
+			android:theme="@style/FullscreenTheme" />
+		<activity android:name=".threads.MainMenuActivity"></activity>
+		<activity android:name=".my_viewpager.ScreenSlidePagerActivity">
 			<intent-filter>
 				
 				<!--
@@ -35,7 +28,7 @@
 				<category android:name="android.intent.category.BROWSABLE" />
 			</intent-filter>
 		</activity>
-		<activity android:name=".recycleview_adapters.MovieListActivity" />
+		<activity android:name=".recyclerview_adapters_by_lec.MovieListActivity" />
 		<activity android:name=".avengers_movie.MovieActivity">
 			<intent-filter>
 				
@@ -48,9 +41,17 @@
 				<category android:name="android.intent.category.BROWSABLE" />
 			</intent-filter>
 		</activity>
-		<activity android:name=".MainActivity" />
-		<activity android:name=".fragment_viewpager.MainFragmentsActivity" />
-		<activity android:name=".h_w_viewpager.MainHWViewPageActivity" />
+		<activity android:name=".MainActivity">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				
+				<category android:name="android.intent.category.LAUNCHER" />
+				
+				<action android:name="android.intent.action.VIEW" />
+			</intent-filter>
+		</activity>
+		<activity android:name=".fragment_viewpager_by_lec.MainFragmentsActivity" />
+		<activity android:name=".my_viewpager.MainHWViewPageActivity" />
 	</application>
 
 </manifest>

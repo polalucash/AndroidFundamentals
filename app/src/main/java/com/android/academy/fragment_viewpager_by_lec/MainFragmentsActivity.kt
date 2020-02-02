@@ -1,4 +1,4 @@
-package com.android.academy.fragment_viewpager
+package com.android.academy.fragment_viewpager_by_lec
 
 import android.content.Context
 import android.content.Intent

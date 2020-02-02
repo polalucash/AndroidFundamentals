@@ -1,4 +1,4 @@
-package com.android.academy.fragment_viewpager
+package com.android.academy.fragment_viewpager_by_lec
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

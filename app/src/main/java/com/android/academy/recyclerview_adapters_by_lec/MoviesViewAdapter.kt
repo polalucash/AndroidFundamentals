@@ -1,4 +1,4 @@
-package com.android.academy.recycleview_adapters
+package com.android.academy.recyclerview_adapters_by_lec
 
 import android.content.Context
 import android.view.LayoutInflater

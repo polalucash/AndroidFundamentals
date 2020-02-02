@@ -1,4 +1,4 @@
-package com.android.academy.h_w_viewpager
+package com.android.academy.my_viewpager
 
 import android.content.Context
 import android.content.Intent
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.academy.OnMovieClickListener
 import com.android.academy.R
 import com.android.academy.models.MovieModel
-import com.android.academy.recycleview_adapters.MoviesViewAdapter
+import com.android.academy.recyclerview_adapters_by_lec.MoviesViewAdapter
 import kotlinx.android.synthetic.main.activity_movie_list.*
 
 class MainHWViewPageActivity : AppCompatActivity(), OnMovieClickListener {
@@ -21,7 +21,6 @@ class MainHWViewPageActivity : AppCompatActivity(), OnMovieClickListener {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_movie_list)
-		
 		initRecyclerView()
 	}
 	
