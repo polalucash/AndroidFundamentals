@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/activity_work_manager"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context=".background_services.WorkManagerActivity">
+	
+	<TextView
+		android:id="@+id/activity_title_txt"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="32dp"
+		android:layout_marginTop="16dp"
+		android:layout_marginEnd="32dp"
+		android:text="@string/worker_title_progress"
+		android:textColor="@color/design_default_color_primary_dark"
+		android:textSize="18sp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
+	
+	<TextView
+		android:id="@+id/progress_pct_txt"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="32dp"
+		android:layout_marginTop="16dp"
+		android:layout_marginEnd="32dp"
+		android:text="@string/pct_0"
+		android:textSize="24sp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/activity_title_txt" />
+	
+	<Switch
+		android:id="@+id/network_switch"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="32dp"
+		android:layout_marginTop="24dp"
+		android:layout_marginEnd="32dp"
+		android:checked="false"
+		android:text="@string/worker_requires_network"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/progress_pct_txt" />
+	
+	<Switch
+		android:id="@+id/charge_switch"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="32dp"
+		android:layout_marginTop="16dp"
+		android:layout_marginEnd="32dp"
+		android:checked="false"
+		android:text="@string/worker_requires_charging"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/network_switch" />
+	
+	<Switch
+		android:id="@+id/battery_not_low_switch"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="32dp"
+		android:layout_marginTop="16dp"
+		android:layout_marginEnd="32dp"
+		android:checked="false"
+		android:text="@string/worker_requires_battery_not_low"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/charge_switch" />
+	
+	<Button
+		android:id="@+id/worker_enqueue_btn"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="32dp"
+		android:layout_marginTop="24dp"
+		android:checked="false"
+		android:text="@string/worker_enqueue_work"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/battery_not_low_switch" />
+	
+	<Button
+		android:id="@+id/worker_cancel_btn"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="24dp"
+		android:layout_marginEnd="32dp"
+		android:text="@string/worker_cancel_work"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/battery_not_low_switch" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

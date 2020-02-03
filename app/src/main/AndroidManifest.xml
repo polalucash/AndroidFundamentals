@@ -2,20 +2,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="com.android.academy">
 	
+	<uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+	
 	<application
-		android:allowBackup="true"
 		android:icon="@mipmap/ic_launcher"
 		android:label="@string/app_name"
 		android:roundIcon="@mipmap/ic_launcher_round"
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme">
-		<activity android:name=".background_services.BGServiceActivity"></activity>
+		<activity android:name=".background_services.WorkManagerActivity" />
+		<activity android:name=".background_services.BGServiceActivity" />
 		<activity android:name=".threads.ThreadHandlerActivity" />
 		<activity
 			android:name=".threads.AsyncTaskActivity"
 			android:label="AsyncTaskActivity"
 			android:theme="@style/FullscreenTheme" />
-		<activity android:name=".threads.MainMenuActivity"></activity>
 		<activity android:name=".my_viewpager.ScreenSlidePagerActivity">
 			<intent-filter>
 				
@@ -29,18 +30,6 @@
 			</intent-filter>
 		</activity>
 		<activity android:name=".recyclerview_adapters_by_lec.MovieListActivity" />
-		<activity android:name=".avengers_movie.MovieActivity">
-			<intent-filter>
-				
-				<!--
-					 Include the host attribute if you want your app to respond
-					 only to URLs with your app's domain.
-                -->
-				<data android:scheme="https" />
-				<!-- The BROWSABLE category is required to get links from web pages. -->
-				<category android:name="android.intent.category.BROWSABLE" />
-			</intent-filter>
-		</activity>
 		<activity android:name=".MainActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
@@ -52,6 +41,13 @@
 		</activity>
 		<activity android:name=".fragment_viewpager_by_lec.MainFragmentsActivity" />
 		<activity android:name=".my_viewpager.MainHWViewPageActivity" />
+		
+		<service
+			android:name=".background_services.HardJobService"
+			android:exported="false" />
+		<service
+			android:name=".background_services.HardJobIntentService"
+			android:exported="false" />
 	</application>
 
 </manifest>

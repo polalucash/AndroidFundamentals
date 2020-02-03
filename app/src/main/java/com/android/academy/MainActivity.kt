@@ -7,6 +7,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.android.academy.background_services.BGServiceActivity
+import com.android.academy.background_services.WorkManagerActivity
 import com.android.academy.fragment_viewpager_by_lec.MainFragmentsActivity
 import com.android.academy.threads.AsyncTaskActivity
 import com.android.academy.threads.ThreadHandlerActivity
@@ -21,15 +22,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         
-        movie_list_btn.setOnClickListener {
-            navigateToMovieListActivity()
-        }
-	    fragment_holder_btn.setOnClickListener {
-		    navigateFragmentsActivity()
-	    }
-	    fragment_hw_view_page_btn.setOnClickListener {
-		    navigateHWViewPageActivity()
-	    }
+        movie_list_btn.setOnClickListener {navigateToMovieListActivity()}
+	    fragment_holder_btn.setOnClickListener {navigateFragmentsActivity()}
+	    fragment_hw_view_page_btn.setOnClickListener {navigateHWViewPageActivity()}
     }
 	
 	override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -49,6 +44,9 @@ class MainActivity : AppCompatActivity() {
 			}
 			R.id.activity_bgservice ->{
 				startActivity(Intent(this@MainActivity, BGServiceActivity::class.java))
+			}
+			R.id.activity_work_manager ->{
+				startActivity(Intent(this@MainActivity, WorkManagerActivity::class.java))
 			}
 		}
 		return super.onOptionsItemSelected(item)

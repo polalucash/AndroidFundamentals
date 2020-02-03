@@ -11,4 +11,7 @@
 	<item android:id="@+id/activity_bgservice"
 		android:title="@string/open_background_service_activity"
 		app:showAsAction="never" />
+	<item android:id="@+id/activity_work_manager"
+		android:title="@string/open_workmanager_activity"
+		app:showAsAction="never" />
 </menu>
