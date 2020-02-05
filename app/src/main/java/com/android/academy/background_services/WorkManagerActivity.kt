@@ -1,41 +1,51 @@
 package com.android.academy.background_services
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
-import android.widget.Switch
-import androidx.lifecycle.Observer
-import androidx.work.*
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.work.Constraints
+import androidx.work.NetworkType
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.android.academy.R
-import com.android.academy.background_services.HardJobWorker.Companion.Progress
 import kotlinx.android.synthetic.main.activity_work_manager.*
-import kotlinx.android.synthetic.main.activity_work_manager.progress_pct_txt
 import java.util.*
 
 class WorkManagerActivity : AppCompatActivity(),View.OnClickListener {
-	private lateinit var setRequiredNetworkType: Switch
-	private lateinit var setRequiresCharging: Switch
-	private lateinit var setRequiresBatteryNotLow: Switch
-	private var workRequestId: UUID? = null
+	private var workId: UUID? = null
+	private val backgroundProgressReceiver = WorkerBackgroundProgressReceiver()
+	
+	companion object {
+		
+		const val PROGRESS_UPDATE_ACTION: String = "PROGRESS_UPDATE_ACTION"
+		const val PROGRESS_VALUE_KEY: String = "PROGRESS_VALUE_KEY"
+		const val SERVICE_STATUS: String = "SERVICE_STATUS"
+	}
+	
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_work_manager)
 		worker_enqueue_btn.setOnClickListener(this)
 		worker_cancel_btn.setOnClickListener(this)
-		
-		workRequestId = savedInstanceState?.getString("workRequestId")?.let {
-			UUID.fromString(it)
-		}
+	}
+	
+	override fun onStart() {
+		super.onStart()
+		registerReceiver(backgroundProgressReceiver, IntentFilter(PROGRESS_UPDATE_ACTION))
 	}
 	
 	override fun onClick(v: View?) {
 		when (v?.id) {
 			R.id.worker_enqueue_btn -> {
-				if (workRequestId == null) queueWork()
+				if (workId == null) queueWork()
 			}
 			R.id.worker_cancel_btn -> {
-				workRequestId?.let {
+				workId?.let {
 					cancelWork()
 				}
 			}
@@ -43,13 +53,31 @@ class WorkManagerActivity : AppCompatActivity(),View.OnClickListener {
 	}
 	
 	private fun cancelWork() {
-		WorkManager.getInstance(applicationContext)
-			.cancelWorkById(workRequestId!!)
-		workRequestId = null
+		workId?.let {
+			WorkManager
+				.getInstance(this)
+				.cancelWorkById(it)
+			workId = null
+		}
 	}
 	
 	private fun queueWork() {
-		val constraints = Constraints.Builder()
+		if (workId == null) {
+			val constraints = buildConstraints()
+			OneTimeWorkRequestBuilder<HardJobWorker>()
+				.setConstraints(constraints)
+				.build()
+				.apply {
+					workId = this.id
+					WorkManager
+						.getInstance(this@WorkManagerActivity)
+						.enqueue(this)
+				}
+		}
+	}
+	
+	private fun buildConstraints(): Constraints {
+		return Constraints.Builder()
 			.setRequiredNetworkType(
 				if (network_switch.isChecked)
 					NetworkType.CONNECTED
@@ -58,46 +86,36 @@ class WorkManagerActivity : AppCompatActivity(),View.OnClickListener {
 			.setRequiresCharging(charge_switch.isChecked)
 			.setRequiresBatteryNotLow(battery_not_low_switch.isChecked)
 			.build()
-		
-		val workRequest = OneTimeWorkRequestBuilder<HardJobWorker>()
-			.setConstraints(constraints)
-			.build()
-			.apply {
-				WorkManager
-					.getInstance(this@WorkManagerActivity)
-					.enqueue(this)
-			}
-		workRequestId = workRequest.id
-		WorkManager.getInstance(applicationContext)
-			// requestId is the WorkRequest id
-			.getWorkInfoByIdLiveData(workRequestId!!)
-			.observe(this, Observer { workInfo: WorkInfo? ->
-				if (workInfo != null) {
-					val progress = workInfo.progress.getInt(Progress, -1)
-					if (progress >= 0) {
-						if (progress == 100) {
-							progress_pct_txt.text = getString(R.string.done)
-						}
-						if (progress >= 0)
-							progress_pct_txt.text =
-								String.format(Locale.getDefault(), "%d%%", progress)
-					}
-				}
-			})
 	}
 	
-	override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
-		outState.putBoolean("setRequiredNetworkType", setRequiredNetworkType.isChecked)
-		outState.putBoolean("setRequiresCharging", setRequiresCharging.isChecked)
-		outState.putBoolean("setRequiresBatteryNotLow", setRequiresBatteryNotLow.isChecked)
-		workRequestId?.let { outState.putString("workRequestId", workRequestId.toString())}
-		super.onSaveInstanceState(outState, outPersistentState)
-	}
 	
+	override fun onStop() {
+		unregisterReceiver(backgroundProgressReceiver)
+		super.onStop()
+	}
 	override fun onDestroy() {
-		if(workRequestId!=null){
+		if (workId != null) {
 			cancelWork()
 		}
 		super.onDestroy()
 	}
+	
+	inner class WorkerBackgroundProgressReceiver : BroadcastReceiver() {
+		override fun onReceive(context: Context, intent: Intent) {
+			val progress = intent.getIntExtra(PROGRESS_VALUE_KEY, -1)
+			val text: String
+			if (progress >= 0) {
+				if (progress > 99) {
+					text = context.getString(R.string.worker_work_done)
+					workId = null
+				}
+				else {
+					text = "$progress %"
+				}
+				progress_pct_txt.text = text
+			}
+			intent.getStringExtra(SERVICE_STATUS)?.let { msg->Toast.makeText(context,msg,Toast.LENGTH_SHORT).show() }
+		}
+	}
+	
 }
