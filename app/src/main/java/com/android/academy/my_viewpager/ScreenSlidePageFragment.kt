@@ -1,6 +1,5 @@
 package com.android.academy.my_viewpager
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -10,54 +9,47 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.android.academy.R
 import com.android.academy.models.MovieModel
+import com.android.academy.networking.MovieVideoResult
+import com.android.academy.networking.MovieVideosList
+import com.android.academy.networking.NetworkingConstants
+import com.android.academy.networking.RestClient
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_movie_details.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.util.*
 
-class ScreenSlidePageFragment: Fragment() {
+class ScreenSlidePageFragment: Fragment(),View.OnClickListener {
 	
-	private lateinit var posterImage: ImageView
-	private lateinit var titleText: TextView
-	private lateinit var overviewText: TextView
-	private lateinit var releaseDateText: TextView
-	private lateinit var trailerUrlBtn: Button
-	
-	override fun onCreateView(
-		inflater: LayoutInflater,
-		container: ViewGroup?,
-		savedInstanceState: Bundle?
+	private var movieModel: MovieModel? = null
+	private val picasso = Picasso.get()
+	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?
 	): View {
-		val view = inflater.inflate(R.layout.fragment_movie_details, container, false)
-		bindViews(view)
-		
-		val movieModel: MovieModel? = arguments?.getParcelable(MovieModelTAG)
-		movieModel?.let { loadMovie( it,container) }
-		return view
+		return inflater.inflate(R.layout.fragment_movie_details, container, false)
 	}
 	
-	private fun loadMovie(
-		movieModel: MovieModel,
-		container: ViewGroup?
-	) {
-		titleText.text = movieModel.title
-		overviewText.text = movieModel.overview
-		posterImage.setImageResource(movieModel.imageRes)
-		releaseDateText.text = movieModel.releaseDate
-		trailerUrlBtn.setOnClickListener{
-			movieModel.trailerUrl?.let { it1 ->
-				if (container != null) {
-					openWebPage(it1, container.context)
-				}
-			}
-		}
+	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+		movieModel = arguments?.getParcelable(MovieModelTAG)
+		movieModel?.let { loadMovie(it) }
+		details_fragment_trailer_btn.setOnClickListener(this)
+		super.onViewCreated(view, savedInstanceState)
 	}
 	
-	private fun bindViews(view: View) {
-		titleText = view.findViewById(R.id.details_fragment_title)
-		overviewText = view.findViewById(R.id.details_fragment_overview_text)
-		posterImage = view.findViewById(R.id.details_fragment_poster)
-		releaseDateText = view.findViewById(R.id.details_fragment_release_date)
-		trailerUrlBtn = view.findViewById(R.id.details_fragment_trailer_btn)
+	private fun loadMovie(movieModel: MovieModel) {
+		picasso
+			.load(movieModel.posterUrl)
+			.into(details_fragment_poster)
+		picasso
+			.load(movieModel.coverUrl)
+			.into(details_fragment_cover)
+		details_fragment_title.text = movieModel.title
+		details_fragment_overview_text.text = movieModel.overview
+		details_fragment_release_date.text = movieModel.releaseDate
 	}
 	
 	companion object {
@@ -71,8 +63,44 @@ class ScreenSlidePageFragment: Fragment() {
 		}
 	
 	}
-	fun openWebPage(url: String, context: Context) {
-		context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+	
+	override fun onClick(v: View?) {
+		movieModel?.let {
+			RestClient.moviesService.getMovieTrailer(movieModel!!.movieId)
+				.enqueue(object : Callback<MovieVideosList> {
+					override fun onFailure(call: Call<MovieVideosList>, t: Throwable) {
+						Toast.makeText(
+							context,
+							"something went wrong",
+							Toast.LENGTH_SHORT
+						).show()
+					}
+					
+					override fun onResponse(
+						call: Call<MovieVideosList>,
+						response: Response<MovieVideosList>
+					) {
+						val key = response.body()?.results?.firstOrNull { r ->
+							r.site.toLowerCase(
+								Locale.getDefault()
+							) == "youtube"
+						}?.key
+						if (key != null) {
+							val trailerUrl = NetworkingConstants.YOUTUBE_BASE_URL + key
+							val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(trailerUrl))
+							startActivity(browserIntent)
+						} else {
+							Toast.makeText(
+								context,
+								"something went wrong",
+								Toast.LENGTH_SHORT
+							).show()
+						}
+					}
+				})
+		}
 		
 	}
+	
+	
 }

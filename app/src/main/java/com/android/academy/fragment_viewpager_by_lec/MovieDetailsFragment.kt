@@ -45,7 +45,7 @@ class MovieDetailsFragment : Fragment() {
 	private fun loadMovie(movie: MovieModel) {
 		titleText.text = movie.title
 		overviewText.text = movie.overview
-		posterImage.setImageResource(movie.imageRes)
+		//posterImage.setImageResource(movie.imageRes)
 	
 	}
 	

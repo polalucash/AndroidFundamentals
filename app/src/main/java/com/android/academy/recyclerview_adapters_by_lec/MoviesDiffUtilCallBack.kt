@@ -5,8 +5,8 @@ import com.android.academy.models.MovieModel
 
 class MoviesDiffUtilCallBack : ItemCallback<MovieModel>() {
     override fun areItemsTheSame(oldItem: MovieModel, newItem: MovieModel): Boolean {
-        return oldItem.imageRes == newItem.imageRes
-                && oldItem.title == newItem.title
+        return oldItem.title == newItem.title
+		        && oldItem.posterUrl == newItem.posterUrl
                 && oldItem.overview == newItem.overview
     }
 

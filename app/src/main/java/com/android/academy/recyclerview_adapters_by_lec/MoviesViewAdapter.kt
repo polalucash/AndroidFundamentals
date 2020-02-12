@@ -11,12 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.academy.OnMovieClickListener
 import com.android.academy.R
 import com.android.academy.models.MovieModel
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_movie.view.*
 
-class MoviesViewAdapter(
-	context: Context,
-	private val movieClickListener: OnMovieClickListener
-) 	: RecyclerView.Adapter<MoviesViewAdapter.MovieViewHolder>() {
+class MoviesViewAdapter(context: Context, private val movieClickListener: OnMovieClickListener)
+	: RecyclerView.Adapter<MoviesViewAdapter.MovieViewHolder>() {
 	
 	class MovieViewHolder(view: View, movieClickListener: OnMovieClickListener) :
 		RecyclerView.ViewHolder(view) {
@@ -30,32 +29,38 @@ class MoviesViewAdapter(
 				movieClickListener.onMovieClicked(movieModel)
 			}
 		}
+		
 		fun bind(movieModel: MovieModel) {
-			ivImage.setImageResource(movieModel.imageRes)
+			//ivImage.setImageResource(movieModel.imageRes)
 			tvTitle.text = movieModel.title
 			tvOverview.text = movieModel.overview
+			if (movieModel.posterUrl != null) {
+				Picasso
+					.get()
+					.load(movieModel.posterUrl)
+					.into(ivImage)
+			}
 			this.movieModel = movieModel
 		}
 	}
-    private val layoutInflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-    private val moviesAsyncListDiffer = AsyncListDiffer<MovieModel>(this, MoviesDiffUtilCallBack())
-
-    override fun getItemCount() = moviesAsyncListDiffer.currentList.size
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        val view = layoutInflater.inflate(R.layout.item_movie, parent, false)
-        return MovieViewHolder(
-	        view,
-	        movieClickListener
-        )
-    }
-
-    fun setData(newItems: List<MovieModel>) {
-        moviesAsyncListDiffer.submitList(newItems)
-    }
-
-    override fun onBindViewHolder(movieHolder: MovieViewHolder, position: Int) {
-        val viewModel = moviesAsyncListDiffer.currentList[position]
-        movieHolder.bind(viewModel)
-    }
+	
+	private val layoutInflater: LayoutInflater =
+		context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+	private val moviesAsyncListDiffer = AsyncListDiffer<MovieModel>(this, MoviesDiffUtilCallBack())
+	
+	override fun getItemCount() = moviesAsyncListDiffer.currentList.size
+	
+	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
+		val view = layoutInflater.inflate(R.layout.item_movie, parent, false)
+		return MovieViewHolder(view, movieClickListener)
+	}
+	
+	fun setData(newItems: List<MovieModel>) {
+		moviesAsyncListDiffer.submitList(newItems)
+	}
+	
+	override fun onBindViewHolder(movieHolder: MovieViewHolder, position: Int) {
+		val viewModel = moviesAsyncListDiffer.currentList[position]
+		movieHolder.bind(viewModel)
+	}
 }
